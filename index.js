@@ -3,7 +3,7 @@ const pino = require('pino');
 
 // ⚠️ ضع رقم هاتفك هنا مع مفتاح الدولة (بدون علامة + أو أصفار)
 // مثال لليمن: 9677XXXXXXXX
-const phoneNumber = "967700000000"; 
+const phoneNumber = "967737044480"; 
 
 const randomDelay = () => {
     const min = 3000;
