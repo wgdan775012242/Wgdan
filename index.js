@@ -1,8 +1,14 @@
 const { makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const pino = require('pino');
+const http = require('http'); // 🟢 إضافة مهمة لمنصة Render
+
+// 🟢 خادم وهمي لإرضاء منصة Render وإبقاء البوت يعمل 24 ساعة
+http.createServer((req, res) => {
+    res.write('Bot is running smoothly!');
+    res.end();
+}).listen(process.env.PORT || 8080);
 
 // ⚠️ ضع رقم هاتفك هنا مع مفتاح الدولة (بدون علامة + أو أصفار)
-// مثال لليمن: 9677XXXXXXXX
 const phoneNumber = "967737044480"; 
 
 const randomDelay = () => {
@@ -17,12 +23,12 @@ async function startBot() {
 
     const sock = makeWASocket({
         auth: state,
-        printQRInTerminal: false, // تم إيقاف الـ QR لأننا سنستخدم كود الربط
+        printQRInTerminal: false,
         logger: pino({ level: 'silent' }),
-        browser: ["Ubuntu", "Chrome", "20.0.04"] // تعريف المتصفح مطلوب لهذه الطريقة
+        browser: ["Ubuntu", "Chrome", "20.0.04"]
     });
 
-    // طلب كود الربط إذا لم يكن الحساب مسجلاً مسبقاً
+    // 🟢 زيادة وقت الانتظار حتى يكتمل الاتصال قبل طلب الكود
     if (!sock.authState.creds.registered) {
         setTimeout(async () => {
             try {
@@ -37,9 +43,9 @@ async function startBot() {
                 console.log(`3. اضغط (ربط جهاز) ثم اختر (الربط برقم هاتف بدلاً من ذلك).`);
                 console.log(`4. أدخل الكود الموضح بالأعلى.`);
             } catch (error) {
-                console.error("حدث خطأ أثناء طلب كود الربط:", error);
+                console.log("حدث خطأ بسيط في جلب الكود، سيتم المحاولة مرة أخرى...");
             }
-        }, 3000);
+        }, 6000); // 6 ثواني لضمان استقرار الاتصال
     }
 
     sock.ev.on('connection.update', (update) => {
@@ -47,10 +53,12 @@ async function startBot() {
         
         if (connection === 'close') {
             const shouldReconnect = lastDisconnect.error?.output?.statusCode !== 401;
-            console.log('تم فصل الاتصال. جاري إعادة المحاولة...', shouldReconnect);
-            if (shouldReconnect) startBot();
+            if (shouldReconnect) {
+                // 🟢 تأخير إعادة المحاولة لتجنب التكرار السريع في الشاشة
+                setTimeout(startBot, 4000); 
+            }
         } else if (connection === 'open') {
-            console.log('✅ تم الاتصال بنجاح! البوت يعمل الآن.');
+            console.log('✅ تم الاتصال بنجاح! البوت يعمل الآن ومستعد للرد.');
         }
     });
 
