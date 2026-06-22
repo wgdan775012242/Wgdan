@@ -20,16 +20,20 @@ async function startBot() {
         browser: ["Ubuntu", "Chrome", "20.0.04"]
     });
 
-    if (!sock.authState.creds.registered) {
+        if (!sock.authState.creds.registered) {
+        console.log("⏳ انتظر 20 ثانية حتى يستقر الاتصال...");
         setTimeout(async () => {
             try {
-                let code = await sock.requestPairingCode(phoneNumber);
-                console.log(`\n========================================`);
-                console.log(`📱 كود الربط: ${code}`);
-                console.log(`========================================\n`);
+                let code = await sock.requestPairingCode("967737044480");
+                console.log(`\n\n========================================`);
+                console.log(`📱 كود الربط هو: ${code}`);
+                console.log(`========================================\n\n`);
             } catch (error) {
-                console.log("جاري الانتظار للاتصال بالخادم...");
+                console.log("⚠️ فشل الاتصال، سيعيد البوت المحاولة تلقائياً...");
             }
+        }, 20000); // 20 ثانية انتظار
+    }
+
         }, 15000); // 15 ثانية تأخير لضمان استقرار الاتصال
     }
 
