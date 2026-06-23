@@ -1,0 +1,9 @@
+# Simple HUD (Arabic)
+[gd_scene load_steps=2 format=3]
+
+[ext_resource path="res://assets/ui_font.ttf" type="Font" id=1]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+text = "مرحبا بصنعاء! استخدم W A S D للحركة، Tab لتبديل الشخصية"
