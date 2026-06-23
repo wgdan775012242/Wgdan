@@ -1,0 +1,16 @@
+# .gitignore for Godot projects
+.import/
+.export/
+export_presets.cfg
+/.godot/
+.godot/
+*.import
+*.imported
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/

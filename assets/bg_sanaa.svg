@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#CFE8C9" />
+  <!-- Stylized Sana'a skyline / map hints -->
+  <g fill="#D9B38C" stroke="#8C6A4B" stroke-width="2">
+    <rect x="80" y="420" width="120" height="80" />
+    <rect x="220" y="380" width="160" height="120" />
+    <rect x="420" y="440" width="200" height="60" />
+    <rect x="660" y="360" width="180" height="140" />
+    <rect x="880" y="420" width="140" height="80" />
+  </g>
+  <!-- Roads -->
+  <g stroke="#777" stroke-width="12" stroke-linecap="round">
+    <path d="M0 520 L1280 520" fill="none" />
+    <path d="M200 320 L900 320" fill="none" />
+    <path d="M500 100 L500 700" fill="none" />
+  </g>
+</svg>
