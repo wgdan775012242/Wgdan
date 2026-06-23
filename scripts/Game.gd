@@ -4,6 +4,8 @@ extends Node2D
 @export var plane_scene: PackedScene
 @export var player_node_path: NodePath
 @export var taxi_spawn_points_paths: Array = []
+@export var music_player_path: NodePath = NodePath("/root/Main/MusicPlayer")
+@export var ambience_player_path: NodePath = NodePath("/root/Main/AmbiencePlayer")
 
 var player: Node2D
 
@@ -14,6 +16,7 @@ func _ready():
         if sp:
             _spawn_taxi(sp.global_position)
     _start_plane_timer()
+    _start_audio()
 
 func _spawn_taxi(pos: Vector2):
     if not taxi_scene:
@@ -47,3 +50,12 @@ func _on_plane_timer():
     else:
         p.global_position = Vector2(1400, y)
         p.direction = Vector2(-1, 0)
+
+func _start_audio():
+    # play music and ambience if players exist
+    var m = get_node_or_null(music_player_path)
+    if m and m is AudioStreamPlayer:
+        m.play()
+    var a = get_node_or_null(ambience_player_path)
+    if a and a is AudioStreamPlayer:
+        a.play()

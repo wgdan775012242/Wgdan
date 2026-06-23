@@ -1,8 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player_male.svg" type="Texture2D" id=2]
 [ext_resource path="res://assets/player_female.svg" type="Texture2D" id=3]
+[ext_resource path="res://assets/sfx/foot_step.wav" type="AudioStream" id=4]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource( 1 )
@@ -19,7 +20,15 @@ texture = ExtResource( 3 )
 position = Vector2(0, 0)
 visible = false
 
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+autoplay = false
+position = Vector2(0, 0)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = CircleShape2D {
 	radius = 12.0
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

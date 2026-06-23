@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,14 @@
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource( 5 )
 position = Vector2(640, 360)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = null
+volume_db = -6.0
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = null
+volume_db = -8.0
 
 [node name="PlayerHolder" type="Node2D" parent="."]
 
